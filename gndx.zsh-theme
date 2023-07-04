@@ -165,4 +165,4 @@ TRAPALRM() {
     fi
 }
 
-PROMPT='$(git_cambios_remotos)$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)'
+PROMPT='$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)'
