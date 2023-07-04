@@ -60,17 +60,9 @@ function git_stash_count() {
         echo "%F{yellow}⚑ Stash: ${count}%f "
     fi
 }
-# Declarar una variable global para almacenar en caché los resultados
-declare -A cache
 
 function git_cambios_remotos() {
     local remote_changes=0
-
-    # Verificar si el resultado ya está en la caché
-    if [[ ${cache["git_cambios_remotos"]} ]]; then
-        echo "${cache["git_cambios_remotos"]}"
-        return
-    fi
 
     # Verificar cambios en la rama remota 'develop'
     git fetch origin develop >/dev/null 2>&1
@@ -79,19 +71,19 @@ function git_cambios_remotos() {
         remote_changes=1
     fi
 
-    if [ "$remote_changes" -eq 1 ]; then
-        result="%F{red}🔀 REMOTE CHANGES%f"
-    else
-        result="%F{green}✔️ NO REMOTE CHANGES%f"
+    # Verificar cambios en la rama remota 'main'
+    git fetch origin main >/dev/null 2>&1
+    local main_changes=$(git rev-list --count HEAD..origin/main 2>/dev/null)
+    if [[ "$main_changes" && "$main_changes" -gt 0 ]]; then
+        remote_changes=1
     fi
 
-    # Almacenar el resultado en la caché
-    cache["git_cambios_remotos"]=$result
-
-    echo "$result"
+    if [ "$remote_changes" -eq 1 ]; then
+        echo "%F{red}🔀 REMOTE CHANGES%f"
+    else
+        echo "%F{green}✔️ NO REMOTE CHANGES%f"
+    fi
 }
-
-
 
 
 
