@@ -1,4 +1,4 @@
-# gndx-zsh-theme hola desde
+# gndx-zsh-theme
 An oh-my-zsh theme.
 
 ## Introducion
