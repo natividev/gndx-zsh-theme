@@ -60,7 +60,6 @@ function git_stash_count() {
         echo "%F{yellow}⚑ Stash: ${count}%f "
     fi
 }
-
 # Declarar una variable global para almacenar en caché los resultados
 declare -A cache
 
@@ -91,6 +90,10 @@ function git_cambios_remotos() {
 
     echo "$result"
 }
+
+
+
+
 
 function update_command_status() {
     local arrow=""
