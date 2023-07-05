@@ -172,4 +172,5 @@ TRAPALRM() {
     fi
 }
 
-PROMPT='$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)'
+
+PROMPT='$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)$(notion_prompt $BUFFER)'
