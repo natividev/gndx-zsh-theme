@@ -139,14 +139,6 @@ function docker_image_count() {
     local count=$(docker images -q | wc -l)
     echo "%F{blue}📦 Docker Images: ${count}%f "
 }
-
-function notion_prompt() {
-    if [[ $1 == \#* ]]; then
-        local notion_output=$(YOUR_API_CALL_HERE)
-        echo "%F{color_of_your_choice}${notion_output}%f"
-    fi
-}
-
 precmd() {
     local last_cmd_return_code=$?
     local last_cmd_result=true
@@ -159,8 +151,6 @@ precmd() {
     update_git_status
     update_command_status $last_cmd_result
     output_command_execute_after $last_cmd_result
-
-    notion_prompt "$1"
 }
 
 setopt PROMPT_SUBST
@@ -173,4 +163,4 @@ TRAPALRM() {
 }
 
 
-PROMPT='$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)$(notion_prompt $BUFFER)'
+PROMPT='$(git_problema)$(directory)$(git_status)$(git_stash_count)$(node_version)$(command_status)'
