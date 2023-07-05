@@ -140,6 +140,13 @@ function docker_image_count() {
     echo "%F{blue}📦 Docker Images: ${count}%f "
 }
 
+function notion_prompt() {
+    if [[ $1 == \#* ]]; then
+        local notion_output=$(YOUR_API_CALL_HERE)
+        echo "%F{color_of_your_choice}${notion_output}%f"
+    fi
+}
+
 precmd() {
     local last_cmd_return_code=$?
     local last_cmd_result=true
@@ -150,10 +157,10 @@ precmd() {
     fi
 
     update_git_status
-
     update_command_status $last_cmd_result
-
     output_command_execute_after $last_cmd_result
+
+    notion_prompt "$1"
 }
 
 setopt PROMPT_SUBST
